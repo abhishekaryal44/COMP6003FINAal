@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Classrooms - DIMS{% endblock %}
+
+{% block content %}
+<header class="page-header">
+    <h1>Campus Classrooms</h1>
+    <p>Facility details for Sydney and Fremantle campuses.</p>
+</header>
+
+<div class="table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Room Number</th>
+                <th>Building</th>
+                <th>Capacity</th>
+                <th>Campus</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for classroom in classrooms %}
+            <tr>
+                <td>{{ classroom.roomNum }}</td>
+                <td>{{ classroom.buildingNum }}</td>
+                <td>{{ classroom.seat_capacity }}</td>
+                <td>{{ classroom.campus }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
