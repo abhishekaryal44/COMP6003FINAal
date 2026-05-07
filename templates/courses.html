@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Course Search - DIMS{% endblock %}
+
+{% block content %}
+<header class="page-header">
+    <h1>Course Search</h1>
+    <p>Find courses by program and semester.</p>
+</header>
+
+<div class="search-section">
+    <form method="POST" class="search-form">
+        <div class="form-group">
+            <label for="program_id">Select Program</label>
+            <select name="program_id" id="program_id" required>
+                <option value="" disabled {{ 'selected' if not selected_program }}>-- Choose Program --</option>
+                {% for program in programs %}
+                <option value="{{ program.progID }}" {{ 'selected' if selected_program == program.progID }}>
+                    {{ program.progName }} ({{ program.progID }})
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="semester">Semester</label>
+            <input type="number" name="semester" id="semester" min="1" max="8" value="{{ selected_semester or 1 }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+{% if selected_program %}
+    <div class="results-section">
+        <h2>Results for {{ selected_program }} (Semester {{ selected_semester }})</h2>
+        {% if courses %}
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Course Code</th>
+                            <th>Course Name</th>
+                            <th>Assessments</th>
+                            <th>Semester</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for course in courses %}
+                        <tr>
+                            <td>{{ course.courseCode }}</td>
+                            <td>{{ course.courseName }}</td>
+                            <td>{{ course.num_of_assessments }}</td>
+                            <td>{{ course.semester }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="no-results">No courses found for this program and semester.</p>
+        {% endif %}
+    </div>
+{% endif %}
+{% endblock %}

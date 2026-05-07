@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Student Search - DIMS{% endblock %}
+
+{% block content %}
+<header class="page-header">
+    <h1>Student Information</h1>
+    <p>Search for student details and enrollment history.</p>
+    <div style="margin-top: 1rem;">
+        <a href="/students/add" class="btn btn-primary">+ Add New Student</a>
+    </div>
+</header>
+
+<div class="search-section">
+    <form method="POST" class="search-form">
+        <div class="form-group">
+            <label for="student_id">Student ID</label>
+            <input type="text" name="student_id" id="student_id" placeholder="e.g. S3010001" value="{{ student_id or '' }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Lookup</button>
+    </form>
+</div>
+
+{% if student_id %}
+    {% if student %}
+        <div class="student-profile">
+            <div class="profile-header">
+                <h2>{{ student.studName }}</h2>
+                <span class="badge">{{ student.studentID }}</span>
+            </div>
+            
+            <div class="profile-grid">
+                <div class="profile-info">
+                    <h3>Contact & Personal</h3>
+                    <ul>
+                        <li><strong>Email:</strong> {{ student.email }}</li>
+                        <li><strong>Age:</strong> {{ student.age }}</li>
+                        <li><strong>Contact:</strong> {{ student.contactNum }}</li>
+                        <li><strong>Address:</strong> {{ student.address }}</li>
+                    </ul>
+                </div>
+                <div class="profile-stats">
+                    <h3>Academic Standing</h3>
+                    <div class="stat-bar">
+                        <span>Marks: {{ student.marksPercentage }}%</span>
+                        <div class="progress"><div class="fill" style="width: {{ student.marksPercentage }}%"></div></div>
+                    </div>
+                    <div class="stat-bar">
+                        <span>Attendance: {{ student.attendancePercentage }}%</span>
+                        <div class="progress"><div class="fill" style="width: {{ student.attendancePercentage }}%"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="enrolled-courses">
+                <h3>Enrolled Courses</h3>
+                {% if student.enrolled_courses %}
+                    <ul class="course-list">
+                        {% for course in student.enrolled_courses %}
+                            <li><strong>{{ course.courseCode }}</strong>: {{ course.courseName }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No active enrollments found.</p>
+                {% endif %}
+            </div>
+        </div>
+    {% else %}
+        <p class="error-msg">No student found with ID: {{ student_id }}</p>
+    {% endif %}
+{% endif %}
+{% endblock %}

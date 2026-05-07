@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Programs - DIMS{% endblock %}
+
+{% block content %}
+<header class="page-header">
+    <h1>Academic Programs</h1>
+    <p>Complete list of available undergraduate and postgraduate programs.</p>
+</header>
+
+<div class="table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Program Name</th>
+                <th>Level</th>
+                <th>Duration (Yrs)</th>
+                <th>Total Credits</th>
+                <th>Courses</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for program in programs %}
+            <tr>
+                <td>{{ program.progID }}</td>
+                <td>{{ program.progName }}</td>
+                <td>{{ program.progLevel }}</td>
+                <td>{{ program.duration }}</td>
+                <td>{{ program.totalCredit }}</td>
+                <td>{{ program.num_of_courses }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - DIMS{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>Welcome to DIMS</h1>
+    <p>Department Information Management System for the Department of Computer Science.</p>
+    <div class="hero-actions">
+        <a href="/programs" class="btn btn-primary">View Programs</a>
+        <a href="/courses" class="btn btn-secondary">Search Courses</a>
+    </div>
+</div>
+
+<section class="features-grid">
+    <div class="feature-card">
+        <h3>Academic Programs</h3>
+        <p>Explore our range of undergraduate and postgraduate offerings.</p>
+        <a href="/programs">Learn more &rarr;</a>
+    </div>
+    <div class="feature-card">
+        <h3>Course Catalog</h3>
+        <p>Find courses, check semesters, and view classroom locations.</p>
+        <a href="/courses">Search courses &rarr;</a>
+    </div>
+    <div class="feature-card">
+        <h3>Student Records</h3>
+        <p>Quickly retrieve student enrollment and performance data.</p>
+        <a href="/students">Search students &rarr;</a>
+    </div>
+    <div class="feature-card">
+        <h3>Campus Facilities</h3>
+        <p>View classroom details and seating capacities across campuses.</p>
+        <a href="/classrooms">View classrooms &rarr;</a>
+    </div>
+</section>
+{% endblock %}
